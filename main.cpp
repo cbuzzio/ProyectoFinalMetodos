@@ -6,45 +6,46 @@
 using namespace std;
 
 char pathnombre[50];
-char *path = NULL;
-char port[] = "COM5";
-Brazo brazo(10,5,port);
+char *pathData = NULL;
+char *pathSalida = NULL;
+Brazo *brazo;
+int nPuerto;
+char portName[13];
+double longA;
+double longB;
 
 int main(int argc,char *argv[]){
 	
 	if(argc == 1){
-		cout << "Ingrese el path del archivo a imprimir: "<<endl;
+		cout << "Ingrese el path del archivo a trazar: "<<endl;
 		cin >> pathnombre;
-		path = new char[strlen(pathnombre)+1];
-		strcpy(path,pathnombre);
+		pathData = new char[strlen(pathnombre)+1];
+		strcpy(pathData,pathnombre);
 	}else{
-		path = argv[1];
+		pathData = argv[1];
 	}
 	
-	ifstream data;
-	cout << endl << path << endl << endl;
-	data.open(path);
-	
-	if(data.fail()){
-		cout << "Error al abrir el archivo";
-		cin.get();
-		cin.get();
-		return 0;
-	}else{
-		while(!data.eof()){
-			char linea[60];
-			double x;
-			double y;
-			data.getline(linea,sizeof(linea));
-			sscanf(linea,"%lf;%lf\n",&x,&y);
-			if(!brazo.Mover(x,y)){
-				cout << "Error, punto no alcanzable!"<<endl;
-				cin.get();
-				cin.get();
-				return 0;
-			}
+	cout << endl << "Ingrese el numero del puerto serie donde esta conectado el microcontrolador";
+	cin >> nPuerto;
+	if(nPuerto < 10){
+			sprintf(portName,"COM%d",nPuerto);
+		}else{
+			sprintf(portName,"////.//COM%d",nPuerto);
 		}
-	}
-	data.close();
+	
+	cout << endl << endl << "Ingrese las longitudes de los brazos, separados por coma";
+	scanf("%lf,%lf",&longA,&longB);
+	
+	brazo = new Brazo(longA,longB,portName);
+	
+	brazo->setDataFile(pathData);
+	
+	cout << "Ingrese el nombre del archivo de salida: "<<endl;
+	cin >> pathnombre;
+	pathSalida = new char[strlen(pathnombre)+1];
+	strcpy(pathSalida,pathnombre);
+	
+	brazo->setTargetFile(pathSalida);
+		
 	cin.get();
 }
