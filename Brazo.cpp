@@ -5,7 +5,13 @@
 #include <string.h>
 
 using namespace std;
-
+// Hola chris!!!
+// aca mira, realizando un commit.
+// que grande este amigo de magnago.
+// utilizamos github.
+// en marcha nuestra empresa!!!!!! WAW.
+// los odeo.
+// aguante del caño vieja!!!
 char vitalSign[] = "AYA";
 char vitalResponse[] = "Y";
 char received_OK[] = "SMM";
