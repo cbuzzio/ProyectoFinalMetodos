@@ -39,10 +39,6 @@ class Brazo{
 		char* pathIn;
 		char* pathOut;
 		
-
-		
-
-		
 	public:
 		
 		Brazo (double longA, double longB, char *portName){

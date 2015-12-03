@@ -119,7 +119,7 @@ flag Brazo::Mover(double xTarget, double yTarget){
 			micro->WriteData(coord,sizeof(coord));
 		}
 		
-		if(micro->WaitForAnswer(respuesta,5,TIMEOUT)){
+		if(micro->WaitForAnswer(respuesta,5,TIMEOUT) == -1){
 			return NO_SIGN;
 		}
 		
@@ -218,4 +218,7 @@ flag Brazo::Trazar(){
 		
 		return NO_SIGN;
 	}
+	
+	delete [] module;
+	delete [] angle;
 }

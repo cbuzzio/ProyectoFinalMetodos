@@ -37,7 +37,6 @@ int main(int argc,char *argv[]){
 	scanf("%lf,%lf",&longA,&longB);
 	
 	brazo = new Brazo(longA,longB,portName);
-	
 	brazo->setDataFile(pathData);
 	
 	cout << "Ingrese el nombre del archivo de salida: "<<endl;
